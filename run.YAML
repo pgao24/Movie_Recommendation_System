@@ -1,0 +1,24 @@
+services:
+  go_container:
+    build: 
+      context: .
+      dockerfile: dockerfile
+      tags:
+        - "movie_recommendation_image"
+    ports:
+       - "5080:8080"
+    volumes:
+       - type: bind
+         source: /Users/pgao/desktop/Movie_Project/go_code
+         target: /movie_recommendation
+    tty: true
+
+  elastic_search:
+    image: elasticsearch:7.9.3
+    ports:
+      - "8080:9200"
+    tty: true
+    environment:
+      - discovery.type=single-node
+     
+
